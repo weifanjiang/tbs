@@ -13,7 +13,7 @@ python3 measurement.py -m examples/cnn-flowers/model.pickle -i examples/cnn-flow
 ```bash
 python3 examples/lm-imdb/gen.py
 python3 measurement.py -m examples/lm-imdb/model.pickle -i examples/lm-imdb/input.pickle -t 10 -d cpu -o examples/lm-imdb/measurement_cpu.pickle
-python3 measurement.py -m examples/cnn-flowers/model.pickle -i examples/cnn-flowers/input.pickle -t 10 -d gpu -o examples/cnn-flowers/measurement_gpu.pickle
+python3 measurement.py -m examples/lm-imdb/model.pickle -i examples/lm-imdb/input.pickle -t 10 -d gpu -o examples/lm-imdb/measurement_gpu.pickle
 ```
 
 **RNN**
