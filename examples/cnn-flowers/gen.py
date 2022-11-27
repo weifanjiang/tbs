@@ -58,12 +58,10 @@ model = Sequential([
   layers.RandomRotation(0.1, name='random_rotation'),
   layers.RandomZoom(0.1, name='random_zoom'),
   layers.Rescaling(1./255, input_shape=(img_height, img_width, 3), name='rescaling'),
-  layers.Conv2D(16, 3, padding='same', activation='relu', name='first_conv'),
-  layers.MaxPooling2D(name='first_maxpool'),
-  layers.Conv2D(32, 3, padding='same', activation='relu', name='second_conv'),
-  layers.MaxPooling2D(name='second_maxpool'),
-  layers.Conv2D(64, 3, padding='same', activation='relu', name='third_conv'),
-  layers.MaxPooling2D(name='third_maxpool'),
+  layers.Conv2D(16, 3, padding='same', activation='relu', name='conv1'),
+  layers.MaxPooling2D(name='maxpool1'),
+  layers.Conv2D(32, 3, padding='same', activation='relu', name='conv2'),
+  layers.MaxPooling2D(name='maxpool2'),
   layers.Dropout(0.2, name='drop_out'),
   layers.Flatten(name='flatten'),
   layers.Dense(128, activation='relu', name='dense'),
@@ -80,7 +78,7 @@ history = model.fit(
   epochs=epochs
 )
 
-with open(os.path.join(save_dir, 'model_cnn-flowers.pickle'), 'wb') as fout:
+with open(os.path.join(save_dir, 'model.pickle'), 'wb') as fout:
   pickle.dump(model, fout)
 
 test_ds = tf.keras.utils.image_dataset_from_directory(
@@ -94,5 +92,5 @@ test_datas = [x for x in test_ds]
 X_data, Y_data = [x[0] for x in test_datas], [x[1] for x in test_datas]
 X_data = np.array(X_data)
 
-with open(os.path.join(save_dir, 'input_cnn-flowers.pickle'), 'wb') as fout:
+with open(os.path.join(save_dir, 'input.pickle'), 'wb') as fout:
   pickle.dump(X_data, fout)

@@ -1,2 +1,3 @@
-examples/cnn-flowers/input_cnn-flowers.pickle
-examples/cnn-flowers/model_cnn-flowers.pickle
+examples/*/*.pickle
+examples/lm-imdb/aclImdb
+examples/lm-imdb/aclImdb_v1.tar.gz
