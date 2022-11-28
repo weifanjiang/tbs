@@ -1,24 +1,14 @@
 # TensorFlow Benchmarking System
 
-## Measure sequential model runtime
+## Usage
 
-**CNN on flower dataset**
-```bash
-python3 examples/cnn-flowers/gen.py
-python3 measurement.py -m examples/cnn-flowers/model.pickle -i examples/cnn-flowers/input.pickle -t 10 -d cpu -o examples/cnn-flowers/measurement_cpu.pickle
-python3 measurement.py -m examples/cnn-flowers/model.pickle -i examples/cnn-flowers/input.pickle -t 10 -d gpu -o examples/cnn-flowers/measurement_gpu.pickle
+To benchmark a model and dataset combination, include a `gen.py` file that will produce `model.pickle` and `input.pickle`.
+
+The measurement is done by running:
+```
+python3 measurement.py [-p PATH] [-d {cpu,gpu}] [-b BATCH] [-t TRIAL]
 ```
 
-**Language modeling**
-```bash
-python3 examples/lm-imdb/gen.py
-python3 measurement.py -m examples/lm-imdb/model.pickle -i examples/lm-imdb/input.pickle -t 10 -d cpu -o examples/lm-imdb/measurement_cpu.pickle
-python3 measurement.py -m examples/lm-imdb/model.pickle -i examples/lm-imdb/input.pickle -t 10 -d gpu -o examples/lm-imdb/measurement_gpu.pickle
-```
+which `-p` is the directory path that contains the `gen.py` file, `-d` is the hardware device to run the model on, `-b` is batch size for inference, and `-t` is the number of trials for the measurement.
 
-**RNN**
-```bash
-python3 examples/rnn-mnist/gen.py
-python3 measurement.py -m examples/rnn-mnist/model.pickle -i examples/rnn-mnist/input.pickle -t 10 -d cpu -o examples/rnn-mnist/measurement_cpu.pickle
-python3 measurement.py -m examples/rnn-mnist/model.pickle -i examples/rnn-mnist/input.pickle -t 10 -d gpu -o examples/rnn-mnist/measurement_gpu.pickle
-```
+Please see `run_exp.sh` for example usages on three sample models we include: CNN, language model, and RNN.

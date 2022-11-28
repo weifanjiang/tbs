@@ -39,22 +39,22 @@ def __measure_sequential_models(model_loader, input_loader, device, trial, batch
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-d', '--dir', type=str)
+    parser.add_argument('-p', '--path', type=str)
     parser.add_argument('-d', '--device', type=str, choices=['cpu', 'gpu'])
     parser.add_argument('-b', '--batch', type=int, default=512)
     parser.add_argument('-t', '--trial', type=int)
     args = parser.parse_args()
 
-    model_path = os.path.join(args.dir, 'model.pickle')
-    input_path = os.path.join(args.dir, 'input.pickle')
+    model_path = os.path.join(args.path, 'model.pickle')
+    input_path = os.path.join(args.path, 'input.pickle')
 
     if (os.path.isfile(model_path) == False) or (os.path.isfile(input_path) == False):
-        os.system('python3 {}'.format(os.path.join(args.dir, 'gen.py')))
+        os.system('python3 {}'.format(os.path.join(args.path, 'gen.py')))
 
     model_loader = lambda: pickle.load(open(model_path, "rb"))
     input_loader = lambda: pickle.load(open(input_path, "rb"))
 
     result = __measure_sequential_models(model_loader, input_loader, args.device, args.trial, args.batch)
-    out_name = os.path.join(args.output, "{}-{}.pickle".format(args.device, args.batch))
-    with open(args.output, "wb") as fout:
+    out_name = os.path.join(args.path, "{}-{}.pickle".format(args.device, args.batch))
+    with open(out_name, "wb") as fout:
         pickle.dump(result, fout)
