@@ -44,5 +44,5 @@ if __name__ == '__main__':
 
     ax.set_xticks(x_vals)
     ax.set_xticklabels(layer_names, rotation=90)
-    ax.set_ylabel('time (seconds)')
+    ax.set_ylabel('time per sample (seconds)')
     plt.savefig(args.output, bbox_inches='tight')

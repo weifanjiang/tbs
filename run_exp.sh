@@ -1,11 +1,37 @@
-python3 measurement.py -m examples/cnn-flowers/model.pickle -i examples/cnn-flowers/input.pickle -t 10 -d cpu -o examples/cnn-flowers/measurement_cpu.pickle
-python3 measurement.py -m examples/cnn-flowers/model.pickle -i examples/cnn-flowers/input.pickle -t 10 -d gpu -o examples/cnn-flowers/measurement_gpu.pickle
-python3 plot_utils.py -m examples/cnn-flowers/model.pickle -c examples/cnn-flowers/measurement_cpu.pickle -g examples/cnn-flowers/measurement_gpu.pickle -o figs/cnn-flowers.pdf
+#!/bin/bash
 
-python3 measurement.py -m examples/lm-imdb/model.pickle -i examples/lm-imdb/input.pickle -t 10 -d cpu -o examples/lm-imdb/measurement_cpu.pickle
-python3 measurement.py -m examples/lm-imdb/model.pickle -i examples/lm-imdb/input.pickle -t 10 -d gpu -o examples/lm-imdb/measurement_gpu.pickle
-python3 plot_utils.py -m examples/lm-imdb/model.pickle -c examples/lm-imdb/measurement_cpu.pickle -g examples/lm-imdb/measurement_gpu.pickle -o figs/lm-imdb.pdf
+python3 -d examples/cnn-flowers -d cpu -b 64 -t 10
+python3 -d examples/cnn-flowers -d cpu -b 128 -t 10
+python3 -d examples/cnn-flowers -d cpu -b 256 -t 10
+python3 -d examples/cnn-flowers -d cpu -b 512 -t 10
+python3 -d examples/cnn-flowers -d cpu -b 1024 -t 10
 
-python3 measurement.py -m examples/rnn-mnist/model.pickle -i examples/rnn-mnist/input.pickle -t 10 -d cpu -o examples/rnn-mnist/measurement_cpu.pickle
-python3 measurement.py -m examples/rnn-mnist/model.pickle -i examples/rnn-mnist/input.pickle -t 10 -d gpu -o examples/rnn-mnist/measurement_gpu.pickle
-python3 plot_utils.py -m examples/rnn-mnist/model.pickle -c examples/rnn-mnist/measurement_cpu.pickle -g examples/rnn-mnist/measurement_gpu.pickle -o figs/rnn-mnist.pdf
+python3 -d examples/cnn-flowers -d gpu -b 64 -t 10
+python3 -d examples/cnn-flowers -d gpu -b 128 -t 10
+python3 -d examples/cnn-flowers -d gpu -b 256 -t 10
+python3 -d examples/cnn-flowers -d gpu -b 512 -t 10
+python3 -d examples/cnn-flowers -d gpu -b 1024 -t 10
+
+python3 -d examples/lm-imdb -d cpu -b 64 -t 10
+python3 -d examples/lm-imdb -d cpu -b 128 -t 10
+python3 -d examples/lm-imdb -d cpu -b 256 -t 10
+python3 -d examples/lm-imdb -d cpu -b 512 -t 10
+python3 -d examples/lm-imdb -d cpu -b 1024 -t 10
+
+python3 -d examples/lm-imdb -d gpu -b 64 -t 10
+python3 -d examples/lm-imdb -d gpu -b 128 -t 10
+python3 -d examples/lm-imdb -d gpu -b 256 -t 10
+python3 -d examples/lm-imdb -d gpu -b 512 -t 10
+python3 -d examples/lm-imdb -d gpu -b 1024 -t 10
+
+python3 -d examples/cnn-flowers -d cpu -b 64 -t 10
+python3 -d examples/cnn-flowers -d cpu -b 128 -t 10
+python3 -d examples/cnn-flowers -d cpu -b 256 -t 10
+python3 -d examples/cnn-flowers -d cpu -b 512 -t 10
+python3 -d examples/cnn-flowers -d cpu -b 1024 -t 10
+
+python3 -d examples/rnn-mnist -d gpu -b 64 -t 10
+python3 -d examples/rnn-mnist -d gpu -b 128 -t 10
+python3 -d examples/rnn-mnist -d gpu -b 256 -t 10
+python3 -d examples/rnn-mnist -d gpu -b 512 -t 10
+python3 -d examples/rnn-mnist -d gpu -b 1024 -t 10
