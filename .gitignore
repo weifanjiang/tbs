@@ -1,3 +1,4 @@
-examples/*/*.pickle
+examples/*/model.pickle
+examples/*/input.pickle
 examples/lm-imdb/aclImdb
 examples/lm-imdb/aclImdb_v1.tar.gz
