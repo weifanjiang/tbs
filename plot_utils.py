@@ -9,6 +9,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-p', '--path', type=str)
     parser.add_argument('-r', '--redraw', action='store_true')
+    parser.add_argument('-c', '--cost', action='store_true')
     args = parser.parse_args()
 
     devices = ['cpu', 'gpu']
@@ -51,7 +52,12 @@ if __name__ == '__main__':
                 ax.bar(x=pos, height=median_time, label=device, width=bar_width, yerr=percentiles, color=color_dict[device])
             ax.legend(title='device', bbox_to_anchor=(1.04, 1), loc="upper left")
             ax.set_yscale('log')
-            ax.set_ylabel('time per sample (log seconds)')
+
+            if not args.cost:
+                ax.set_ylabel('time per sample (log seconds)')
+            else:
+                ax.set_ylabel('cost per time per sample (log cost per second)')
+
             ax.set_title('{} (batch size {})'.format(basename, batch_size))
             ax.set_xticks(x_vals)
             ax.set_xticklabels(layer_names, rotation=90)
@@ -74,7 +80,12 @@ if __name__ == '__main__':
                 ax.plot(x_vals, avg_time, label=device, c=color_dict[device])
             ax.legend(title='device', bbox_to_anchor=(1.04, 1), loc="upper left")
             ax.set_yscale('log')
-            ax.set_ylabel('time per sample (log seconds)')
+
+            if not args.cost:
+                ax.set_ylabel('time per sample (log seconds)')
+            else:
+                ax.set_ylabel('cost per time per sample (log cost per second)')
+
             ax.set_xlabel('batch size')
             ax.set_title('{} ({})'.format(layer_name, basename))
             ax.set_xticks(x_vals)
