@@ -9,7 +9,7 @@ import time
 def __measure_sequential_models(model_loader, input_loader, device, trial, batch_size):
     # reference: https://www.vultr.com/pricing/#cloud-gpu
     gpu_cost = (2.6 / 3600) # cost per second
-    # reference: aws t3a.large instance - this provides an overestimate
+    # reference: aws t3a.micro instance - this provides an overestimate
     cpu_cost = (0.008 / 3600) # cost per second 
 
     if device == 'cpu':
