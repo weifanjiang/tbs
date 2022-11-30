@@ -56,7 +56,7 @@ if __name__ == '__main__':
             if not args.cost:
                 ax.set_ylabel('time per sample (log seconds)')
             else:
-                ax.set_ylabel('cost per time per sample (log cost per second)')
+                ax.set_ylabel('cost per sample (log cost per second)')
 
             ax.set_title('{} (batch size {})'.format(basename, batch_size))
             ax.set_xticks(x_vals)
@@ -84,7 +84,7 @@ if __name__ == '__main__':
             if not args.cost:
                 ax.set_ylabel('time per sample (log seconds)')
             else:
-                ax.set_ylabel('cost per time per sample (log cost per second)')
+                ax.set_ylabel('cost per sample (log cost per second)')
 
             ax.set_xlabel('batch size')
             ax.set_title('{} ({})'.format(layer_name, basename))
