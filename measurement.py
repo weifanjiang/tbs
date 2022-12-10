@@ -7,10 +7,6 @@ import time
 
 
 def __measure_sequential_models(model_loader, input_loader, device, trial, batch_size):
-    # reference: https://www.vultr.com/pricing/#cloud-gpu
-    gpu_cost = (2.6 / 3600) # cost per second
-    # reference: aws t3a.micro instance - this provides an overestimate
-    cpu_cost = (0.008 / 3600) # cost per second 
 
     if device == 'cpu':
         os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
@@ -38,12 +34,7 @@ def __measure_sequential_models(model_loader, input_loader, device, trial, batch
                     curr_idx = end_idx
                 end_time = time.time()
 
-                cost_mult = 1 
-                if args.cost:
-                    if device == 'cpu':
-                        cost_mult = cpu_cost
-                    else:
-                        cost_mult = gpu_cost
+                cost_mult = 1 if not args.cost else (args.cost / 3600)
                 result[layer_idx, trial_idx] = (end_time - start_time)/num_samples * cost_mult
                 
             curr_dat = curr_out
@@ -56,7 +47,8 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--device', type=str, choices=['cpu', 'gpu'])
     parser.add_argument('-b', '--batch', type=int, default=512)
     parser.add_argument('-t', '--trial', type=int)
-    parser.add_argument('-c', '--cost', action='store_true')
+    parser.add_argument('-c', '--cost', type=float)
+
     args = parser.parse_args()
 
     model_path = os.path.join(args.path, 'model.pickle')
